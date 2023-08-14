@@ -1,0 +1,155 @@
+/* This code is a SQL Query to analyze Formula 1 Race Data from the years 1950 to 2017. 
+The dataset is from https://www.kaggle.com/datasets/davidcochran/formula-1-race-data-sqlite
+In this query, I only use 6 tables : circuits, constructors, drivers, races, results, and status 
+*/
+
+/* 1. List the winner of each race */
+SELECT 
+	races.name AS "Races",
+    circuits.name AS "Circuit",
+    drivers.forename || ' ' || drivers.surname AS "Winner",
+    races.date AS "Date"
+FROM results
+JOIN races ON results.raceId = races.raceId
+JOIN circuits on races.circuitid = circuits.circuitId
+JOIN drivers ON results.driverId = drivers.driverId
+WHERE results.positionOrder = 1 
+ORDER by date;
+
+/* 2. Ranking drivers with the most win */ 
+SELECT 
+    drivers.forename || ' ' || drivers.surname AS "Driver",
+    drivers.nationality AS "Nationality",
+    COUNT(*) AS "Total wins"
+FROM results
+join drivers ON results.driverId = drivers.driverId
+WHERE results.positionOrder = 1
+GROUP by drivers.driverId
+ORDER by COUNT(*) DESC;
+
+/* 3. Ranking drivers with the most points */ 
+SELECT 
+    drivers.forename || ' ' || drivers.surname AS "Driver",
+    drivers.nationality AS "Nationality",
+    round(sum(points),2) AS "Total points" 
+FROM results 
+JOIN drivers on results.driverId = drivers.driverId
+GROUP by drivers.driverId
+HAVING sum(points) > 0
+ORDER BY sum(points) DESC;
+
+/* 4. Top 10 nationalities with the highest points */ 
+SELECT 
+    drivers.nationality AS "Nationality",
+    round(sum(points),2) AS "Total points" 
+FROM results 
+JOIN drivers on results.driverId = drivers.driverId
+GROUP by drivers.nationality
+HAVING sum(points) > 0
+ORDER BY sum(points) DESC
+LIMIT 10;
+
+/* 5. 2016 Drivers' Championship standings */ 
+SELECT
+	row_number() OVER (ORDER BY sum(points) DESC) AS "Ranking",
+	drivers.forename || ' ' || drivers.surname AS "Driver",
+    constructors.name AS "Team",
+    sum(points) AS "Total points"
+FROM results
+JOIN drivers ON results.driverId = drivers.driverId
+join constructors on results.constructorId = constructors.constructorId
+join races on results.raceId = races.raceId
+WHERE races.year==2016
+GROUP by drivers.driverId;
+
+/* 6. 2016 Constructors' Championship standings */ 
+SELECT
+	row_number() OVER (ORDER BY sum(points) DESC) AS "Ranking",
+	constructors.name AS "Constructor",
+    sum(points) AS "Total points"
+FROM results
+JOIN constructors ON results.constructorId = constructors.constructorId
+join races on results.raceId = races.raceId
+WHERE races.year==2016
+GROUP by constructors.constructorId;
+
+/* 7. Teams and drivers in 2016 Formula One */
+SELECT
+	constructors.name AS "Team", 
+    drivers.forename || ' ' || drivers.surname AS "Driver"
+FROM results
+JOIN constructors on results.constructorId = constructors.constructorId
+JOIN drivers on results.driverId = drivers.driverId
+join races on results.raceId = races.raceId
+WHERE races.year==2016
+GROUP by constructors.constructorId, drivers.driverId
+ORDER BY constructors.name;
+
+/* 8. Fastest lap of each race in 2016 */ 
+SELECT 
+	races.name AS "Race",
+    drivers.forename || ' ' || drivers.surname AS "Driver",
+	fastestlap AS "Fastest lap", 
+    min(fastestlaptime) AS "Fastest laptime",
+    races.date AS date
+FROM results
+JOIN races on results.raceId = races.raceId
+join drivers ON results.driverId = drivers.driverId
+WHERE fastestlaptime is NOT '' AND races.year==2016
+GROUP by races.raceid
+ORDER by fastestlaptime;
+
+/* 9. Comparing grid position and race finish position of Lewis Hamilton in 2016 races */ 
+SELECT
+	races.name AS "Race",
+    results.grid AS "Grid position",
+    results.positionOrder AS "Finish position",
+    CASE
+    	WHEN results.grid > results.positionorder THEN "Faster than qualifying"
+        WHEN results.grid < results.positionorder THEN "Slower than qualifying"
+        ELSE "-"
+    end as "Result",
+    status.status AS "Finishing status"
+FROM results
+JOIN races ON results.raceId = races.raceId
+JOIN drivers ON results.driverId = drivers.driverId
+JOIN status on results.statusId = status.statusId
+WHERE (drivers.forename LIKE "%lewis%" AND drivers.surname LIKE "%hamilton%") AND races.year==2016;
+
+/* 10. Counting each finishing status in Formula One */
+SELECT
+	status.statusId AS "Status ID",
+	status.status AS "Finishing status",
+    COUNT(*) as "Total"
+FROM results
+JOIN status on results.statusId = status.statusId
+GROUP by results.statusId
+ORDER by status.statusid;
+
+/* 11. List all the finishing status of Lewis Hamilton */ 
+SELECT
+	status.statusId AS "Status ID",
+	status.status AS "Finishing status",
+    COUNT(*) as "Total"
+FROM results
+JOIN status on results.statusId = status.statusId
+JOIN drivers on results.driverId = drivers.driverId
+WHERE drivers.forename LIKE "%lewis%" AND drivers.surname LIKE "%hamilton%"
+GROUP by results.statusId
+ORDER by status.statusid;
+
+/* 12. Count how many times accident, collision, and overheating happened in 2016 */ 
+SELECT
+	status.statusId AS "Status ID",
+	status.status AS "Finishing status",
+    COUNT(*) as "Total"
+FROM results
+JOIN status on results.statusId = status.statusId
+JOIN races on results.raceId = races.raceId
+WHERE
+	races.year==2016 AND
+	status.status IN ("Accident", "Collision", "Overheating")
+GROUP by results.statusId
+ORDER by status.statusid;
+
+/* END */
