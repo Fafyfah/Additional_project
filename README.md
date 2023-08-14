@@ -1,2 +1,2 @@
-# sql-project
-Contains my SQL practice project
+# Projects
+Contains all my practice projects
