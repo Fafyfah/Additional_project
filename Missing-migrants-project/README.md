@@ -1,6 +1,6 @@
 # Global Missing Migrants Project
 
-### Global Missing Migrants Dashboard can be accessed here: (post later!)
+### Global Missing Migrants Dashboard can be accessed with this [link](https://public.tableau.com/views/Draft_dashboard/Exploratory?:language=en-US&:display_count=n&:origin=viz_share_link) 
 
 Migration is a fundamental facet of interconnected globalized world. People have been on move since in the past, though, many individuals are compelled to migrates due to dire circumstances such as internal conflicts, human rights violations, and more. Nowadays, migration has become a global issue, characterized by large-scale movements of refugee and migrants across the world, accompanied by a number of deaths and disappearances during these journeys[^1]. According to Missing Migrants project, which is initiated by IOM, the deaths of more than 50,000 migrants has been recorded since 2014 with the remains of over 24,835 individuals who lost their lives during migration not yet been recovered[^2]. Migrants’ journeys are often fraught with danger, they may risk losing contact with their families, falling victim to human trafficking, or enduring exploitation in informal labor arrangements. For that reason, the current migration situation is viewed to be urgent and the issue demands immediate attention to protect the right of migrants as their well-being are at risk.
  
