@@ -19,7 +19,7 @@ The owner noted that due to the complexities of data collection, the number pres
 
 ## Data preparation process
 
-**Note**: You can access the workbook that shows data preparation process using Python/pandas with this [link]()
+**Note**: You can access the workbook that shows data preparation process using Python/pandas with this [link](https://datalore.jetbrains.com/report/static/W7I74JMZPav5kPBU9p9V20/cew0NFB0yeanEIAKJQMOBm)
 
 From examining the dataset, there are several columns that contained null values, including:
 
