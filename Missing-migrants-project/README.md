@@ -2,7 +2,7 @@
 
 ### Global Missing Migrants Dashboard can be accessed with this [link](https://public.tableau.com/views/Draft_dashboard/Exploratory?:language=en-US&:display_count=n&:origin=viz_share_link) 
 
-### Below are the reports of the project :point_down:
+### Below is the report for this project :point_down:
 
 ## Introduction
 
