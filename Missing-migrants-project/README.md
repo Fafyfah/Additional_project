@@ -1,6 +1,8 @@
 # Global Missing Migrants Project
 
-### Global Missing Migrants Dashboard can be accessed with this [link](https://public.tableau.com/views/Draft_dashboard/Exploratory?:language=en-US&:display_count=n&:origin=viz_share_link) 
+### [Global Missing Migrants Dashboard](https://public.tableau.com/views/Draft_dashboard/Exploratory?:language=en-US&:display_count=n&:origin=viz_share_link) :bar_chart:
+
+### [Global Missing Migrants Project workbook](https://datalore.jetbrains.com/report/static/W7I74JMZPav5kPBU9p9V20/cew0NFB0yeanEIAKJQMOBm) :closed_book:
 
 ### Below is the report for this project :point_down:
 
