@@ -68,7 +68,6 @@ The second page of the dashboard consisting of one primary chart and two accompa
 
 The third page, the last page of this dashboard, features **an interactive map** which serves as a dynamic visualization tool displaying the geographical locations of the incidents. This map uses bubble markers, and the size of each bubble shows the number of dead and missing migrants in each incident. This map aims to underline the real-world impact of these incidents and the migrants suffered. Despite maintaining the tone blue throughout the dashboard, I choose a green color to emphasize the geographical markers on the map. The use of color aim to enhance the visibility of these markers and make them easily noticeable. Moreover, the interactive nature of this map allows viewers to *zoom* in for a closer examination of the specific incidents and user can *point* to access additional details about them.
 
-**Report hasn't finished yet!**
 
 **References**
 [^1]: [https://www.un.org/en/global-issues/migration](https://www.un.org/en/global-issues/migration)
